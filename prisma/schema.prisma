@@ -12,3 +12,49 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model Farmer {
+  uid            Int             @id
+  email          String          @unique @db.VarChar(256)
+  name           String          @db.VarChar(256)
+  targetAlert    TargetAlert?
+  captureResults CaptureResult[]
+  historyAlerts  HistoryAlert[]
+
+  @@map("farmers")
+}
+
+model TargetAlert {
+  id          Int     @id @default(autoincrement())
+  email       String? @db.VarChar(256)
+  chatId      String? @map("chat_id") @db.VarChar(256)
+  phoneNumber String? @map("phone_number") @db.VarChar(20)
+  farmerUid   Int     @unique @map("farmer_uid")
+  farmer      Farmer  @relation(fields: [farmerUid], references: [uid])
+
+  @@map("target_alerts")
+}
+
+model CaptureResult {
+  id           Int           @id @default(autoincrement())
+  deadCount    Int           @map("dead_count")
+  createdAt    DateTime      @map("created_at")
+  mediaUrl     String        @map("media_url") @db.VarChar(256)
+  isAlert      Boolean       @map("is_alert")
+  farmerUid    Int           @map("farmer_uid")
+  farmer       Farmer        @relation(fields: [farmerUid], references: [uid])
+  historyAlert HistoryAlert?
+
+  @@map("capture_results")
+}
+
+model HistoryAlert {
+  id              Int           @id @default(autoincrement())
+  isRead          Boolean       @map("is_read")
+  farmerUid       Int           @map("farmer_uid")
+  captureResultId Int           @unique @map("capture_result_id")
+  farmer          Farmer        @relation(fields: [farmerUid], references: [uid])
+  captureResult   CaptureResult @relation(fields: [captureResultId], references: [id])
+
+  @@map("history_alerts")
+}
