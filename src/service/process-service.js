@@ -40,7 +40,15 @@ const create = async (uid, file) => {
       isAlert = true;
     }
 
-    return await prismaClient.captureResult.create({
+    const farmerCount = await prismaClient.farmer.count({
+      where: { uid: uid },
+    });
+
+    if (farmerCount === 0) {
+      throw new ResponseError(404, "Farmer not found");
+    }
+
+    const captureResult = await prismaClient.captureResult.create({
       data: {
         deadChicken: response.data["dead_chicken"],
         createdAt: new Date(),
@@ -49,12 +57,24 @@ const create = async (uid, file) => {
         farmerUid: uid,
       },
       select: {
+        id: true,
         mediaUrl: true,
         deadChicken: true,
         createdAt: true,
         isAlert: true,
       },
     });
+
+    if (isAlert === true) {
+      await prismaClient.historyAlert.create({
+        data: {
+          isRead: false,
+          farmerUid: uid,
+          captureResultId: captureResult.id,
+        },
+      });
+    }
+    return captureResult;
   } catch (e) {
     throw new ResponseError(500, "Failed to connect to the model service");
   }

@@ -9,8 +9,15 @@ const create = async (req, res, next) => {
     const user = req.user;
     const uid = user.uid;
     const result = await processService.create(uid, file);
+    const dataResponse = {
+      media_url: result.mediaUrl,
+      dead_chicken: result.deadChicken,
+      created_at: result.createdAt,
+      is_alert: result.isAlert,
+    };
+
     res.status(201).json({
-      data: result,
+      data: dataResponse,
     });
   } catch (e) {
     next(e);
