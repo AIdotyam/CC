@@ -37,7 +37,7 @@ model TargetAlert {
 
 model CaptureResult {
   id           Int           @id @default(autoincrement())
-  deadCount    Int           @map("dead_count")
+  deadChicken  Boolean       @map("dead_chicken")
   createdAt    DateTime      @map("created_at")
   mediaUrl     String        @map("media_url") @db.VarChar(256)
   isAlert      Boolean       @map("is_alert")
