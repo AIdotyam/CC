@@ -1,4 +1,4 @@
-const admin = require("../../config/firebase-admin.js");
+const admin = require("../firebase/firebase-admin.js");
 
 const authMiddleware = async (req, res, next) => {
   const idToken = req.get("Authorization");
