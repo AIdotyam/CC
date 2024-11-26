@@ -11,7 +11,7 @@ protectedRouter.post("/api/farmers", farmerController.create);
 protectedRouter.put("/api/farmers", farmerController.update);
 
 // Target Alert API
-protectedRouter.post("/api/farmers", targetAlertController.get);
+protectedRouter.post("/api/target-alerts", targetAlertController.get);
 protectedRouter.patch("/api/target-alerts", targetAlertController.update);
 
 module.exports = { protectedRouter };
