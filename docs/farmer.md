@@ -49,8 +49,7 @@ Request Body :
 
 ```json
 {
-  "name": "New Farmer's Name",
-  "email": "example@gmail.com"
+  "name": "New Farmer's Name"
 }
 ```
 
