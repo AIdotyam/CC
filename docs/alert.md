@@ -17,12 +17,12 @@ Response Body Success :
       "id": "1",
       "media_url": "/capture-20241120143501",
       "created_at": "2024-11-20T14:35:01Z",
-      "is-read": false
+      "is_read": false
     },
     {
       "id": "2",
       "media_url": "/capture-20241120143502",
-      "created-at": "2024-11-20T14:35:02Z",
+      "created_at": "2024-11-20T14:35:02Z",
       "is_read": false
     },
     {
