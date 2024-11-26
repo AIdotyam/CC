@@ -3,6 +3,7 @@ const authMiddleware = require("../middleware/auth-middleware.js");
 const farmerController = require("../controller/farmer-controller.js");
 const targetAlertController = require("../controller/target-alert-controller.js");
 const processController = require("../controller/process.controller.js");
+const alertController = require("../controller/alert-controller.js");
 
 const protectedRouter = new express.Router();
 protectedRouter.use(authMiddleware);
@@ -17,5 +18,9 @@ protectedRouter.patch("/api/target-alerts", targetAlertController.update);
 
 // Process API
 protectedRouter.post("/api/process", processController.create);
+
+// Alert API
+protectedRouter.get("/api/alerts", alertController.get);
+protectedRouter.patch("/api/alerts/:id", alertController.update);
 
 module.exports = { protectedRouter };
