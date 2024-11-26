@@ -7,7 +7,10 @@ Endpoint : POST /api/processes
 Headers :
 
 - Authorization : token
-- Content-Type: multipart/form-data
+- Content-Type : multipart/form-data
+
+Request Body :
+media: chicken.png
 
 Response Body Success :
 
