@@ -18,7 +18,7 @@ const update = async (req, res, next) => {
     const name = req.body.name;
     const request = { uid: user.uid, name: name };
     const result = await farmerService.update(request);
-    res.status(201).json({
+    res.status(200).json({
       data: result,
     });
   } catch (e) {
