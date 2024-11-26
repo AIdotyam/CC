@@ -29,7 +29,7 @@ Response Body Error :
 
 ## Update Target Alert API
 
-Endpoint : PATCH /api/target-alerts
+Endpoint : PUT /api/target-alerts
 
 Headers :
 
@@ -39,8 +39,8 @@ Request Body :
 
 ```json
 {
-  "phone_number": "089999999999", // optional
-  "email": "example@gmail.com" // optional
+  "phone_number": "089999999999",
+  "email": "example@gmail.com"
 }
 ```
 
