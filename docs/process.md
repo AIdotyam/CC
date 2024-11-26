@@ -10,7 +10,8 @@ Headers :
 - Content-Type : multipart/form-data
 
 Request Body :
-media: chicken.png
+
+media: chickens.png (example)
 
 Response Body Success :
 
