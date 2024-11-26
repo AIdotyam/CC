@@ -19,7 +19,7 @@ Response Body Success :
 {
   "data": {
     "media_url": "/media-20241120143501",
-    "dead_count": 5,
+    "dead_chicken": true,
     "created_at": "2024-11-20T14:35:01Z",
     "is_alert": true
   }
