@@ -1,8 +1,8 @@
-# Notification API Spec
+# Target Alert API Spec
 
-## Update Notification API
+## Get Target Alert API
 
-Endpoint : GET /api/notifications
+Endpoint : GET /api/target-alerts
 
 Headers :
 
@@ -27,9 +27,9 @@ Response Body Error :
 }
 ```
 
-## Update Notification API
+## Update Target Alert API
 
-Endpoint : PATCH /api/notifications
+Endpoint : PATCH /api/target-alerts
 
 Headers :
 
