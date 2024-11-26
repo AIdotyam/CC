@@ -11,7 +11,7 @@ Headers :
 
 Request Body :
 
-media: chickens.png (example)
+file: chickens.png (example)
 
 Response Body Success :
 
