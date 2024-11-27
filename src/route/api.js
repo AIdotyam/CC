@@ -5,7 +5,7 @@ const targetAlertController = require("../controller/target-alert-controller.js"
 const processController = require("../controller/process.controller.js");
 const alertController = require("../controller/alert-controller.js");
 const summaryController = require("../controller/summary-controller.js");
-const { upload } = require("../utils/storage.js");
+const upload = require("../utils/multer-memory.js");
 
 const protectedRouter = new express.Router();
 protectedRouter.use(authMiddleware);
