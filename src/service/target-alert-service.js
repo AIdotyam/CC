@@ -1,6 +1,7 @@
 const { validate } = require("../validation/validation.js");
 const {
   getTargetAlertValidation,
+  createTargetAlertValidation,
   updateTargetAlertValidation,
 } = require("../validation/target-alert-validation.js");
 const { prismaClient } = require("../application/database.js");
@@ -17,6 +18,30 @@ const get = async (request) => {
     where: { uid: getRequest.uid },
     include: {
       targetAlert: { select: { email: true, phoneNumber: true } },
+    },
+  });
+};
+
+const create = async (request) => {
+  const createRequest = validate(createTargetAlertValidation, request);
+
+  const farmerCount = await prismaClient.farmer.count({
+    where: { uid: createRequest.uid },
+  });
+
+  if (farmerCount === 0) {
+    throw new ResponseError(404, "Farmer not found");
+  }
+
+  return await prismaClient.targetAlert.create({
+    data: {
+      email: createRequest.email,
+      phoneNumber: createRequest.phoneNumber,
+      farmerUid: createRequest.uid,
+    },
+    select: {
+      phoneNumber: true,
+      email: true,
     },
   });
 };
@@ -50,4 +75,4 @@ const update = async (request) => {
   });
 };
 
-module.exports = { get, update };
+module.exports = { get, create, update };
