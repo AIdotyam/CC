@@ -39,7 +39,7 @@ Response Body Error :
 
 ## Update Farmer API
 
-Endpoint : PUT /api/farmers/:uid
+Endpoint : PUT /api/farmers
 
 Headers :
 
