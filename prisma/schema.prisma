@@ -14,7 +14,7 @@ datasource db {
 }
 
 model Farmer {
-  uid            Int             @id
+  uid            String          @id @db.VarChar(256)
   email          String          @unique @db.VarChar(256)
   name           String          @db.VarChar(256)
   targetAlert    TargetAlert?
@@ -29,7 +29,7 @@ model TargetAlert {
   email       String? @db.VarChar(256)
   chatId      String? @map("chat_id") @db.VarChar(256)
   phoneNumber String? @map("phone_number") @db.VarChar(20)
-  farmerUid   Int     @unique @map("farmer_uid")
+  farmerUid   String  @unique @map("farmer_uid") @db.VarChar(256)
   farmer      Farmer  @relation(fields: [farmerUid], references: [uid])
 
   @@map("target_alerts")
@@ -41,7 +41,7 @@ model CaptureResult {
   createdAt    DateTime      @map("created_at")
   mediaUrl     String        @map("media_url") @db.VarChar(256)
   isAlert      Boolean       @map("is_alert")
-  farmerUid    Int           @map("farmer_uid")
+  farmerUid    String        @unique @map("farmer_uid") @db.VarChar(256)
   farmer       Farmer        @relation(fields: [farmerUid], references: [uid])
   historyAlert HistoryAlert?
 
@@ -51,7 +51,7 @@ model CaptureResult {
 model HistoryAlert {
   id              Int           @id @default(autoincrement())
   isRead          Boolean       @map("is_read")
-  farmerUid       Int           @map("farmer_uid")
+  farmerUid       String        @unique @map("farmer_uid") @db.VarChar(256)
   captureResultId Int           @unique @map("capture_result_id")
   farmer          Farmer        @relation(fields: [farmerUid], references: [uid])
   captureResult   CaptureResult @relation(fields: [captureResultId], references: [id])
