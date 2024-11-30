@@ -15,20 +15,20 @@ Response Body Success :
   "data": [
     {
       "id": "1",
-      "media_url": "/capture-20241120143501",
-      "created_at": "2024-11-20T14:35:01Z",
+      "media_url": "https://storage.googleapis.com/aidotyam/media-1732956938086.jpeg",
+      "created_at": "2024-11-30T08:55:23.430Z",
       "is_read": false
     },
     {
       "id": "2",
-      "media_url": "/capture-20241120143502",
-      "created_at": "2024-11-20T14:35:02Z",
+      "media_url": "https://storage.googleapis.com/aidotyam/media-1732956938087.jpeg",
+      "created_at": "2024-11-30T08:56:23.430Z",
       "is_read": false
     },
     {
       "id": "3",
-      "media_url": "/capture-20241120143503",
-      "created_at": "2024-11-20T14:35:03Z",
+      "media_url": "https://storage.googleapis.com/aidotyam/media-1732956938088.jpeg",
+      "created_at": "2024-11-30T08:57:23.430Z",
       "is_read": false
     }
   ]
@@ -65,8 +65,8 @@ Response Body Success :
 {
   "data": {
     "id": "1",
-    "media_url": "/media-20241120143501",
-    "created_at": "2024-11-20T14:35:01Z",
+    "media_url": "https://storage.googleapis.com/bucket-aidotyam/media-1732956922172.jpg",
+    "created_at": "2024-11-30T08:55:23.410Z",
     "is_read": true
   }
 }
