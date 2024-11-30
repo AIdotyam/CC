@@ -21,7 +21,7 @@ protectedRouter.patch("/api/target-alerts", targetAlertController.update);
 
 // Process API
 protectedRouter.post(
-  "/api/process",
+  "/api/processes",
   upload.single("file"),
   processController.create
 );

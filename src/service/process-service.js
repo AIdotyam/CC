@@ -6,16 +6,22 @@ const axios = require("axios");
 const FormData = require("form-data");
 
 const create = async (uid, file) => {
+  const farmerCount = await prismaClient.farmer.count({
+    where: { uid: uid },
+  });
+
+  if (farmerCount === 0) {
+    throw new ResponseError(404, "Farmer not found");
+  }
+
   const formData = new FormData();
   formData.append("file", file.buffer, file.originalname);
-
   try {
     const response = await axios.post(process.env.MODEL_ENDPOINT, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
-
     const fileName = "media-" + Date.now() + path.extname(file.originalname);
 
     // Upload file ke Cloud Storage
@@ -38,14 +44,6 @@ const create = async (uid, file) => {
     let isAlert = false;
     if (response.data["dead_chicken"]) {
       isAlert = true;
-    }
-
-    const farmerCount = await prismaClient.farmer.count({
-      where: { uid: uid },
-    });
-
-    if (farmerCount === 0) {
-      throw new ResponseError(404, "Farmer not found");
     }
 
     const captureResult = await prismaClient.captureResult.create({
@@ -76,7 +74,7 @@ const create = async (uid, file) => {
     }
     return captureResult;
   } catch (e) {
-    throw new ResponseError(500, "Failed to connect to the model service");
+    throw new ResponseError(500, e.message);
   }
 };
 

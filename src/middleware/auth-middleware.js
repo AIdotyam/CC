@@ -9,7 +9,6 @@ const authMiddleware = async (req, res, next) => {
   try {
     const user = await admin.auth().verifyIdToken(idToken);
     req.user = user;
-    console.log(user);
 
     next();
   } catch (e) {
