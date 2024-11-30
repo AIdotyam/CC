@@ -8,7 +8,7 @@ const get = async (req, res, next) => {
       return {
         id: alert.id,
         media_url: alert.captureResult.mediaUrl,
-        created_at: alert.captureResult.mediaUrl,
+        created_at: alert.captureResult.createdAt,
         is_read: alert.isRead,
       };
     });

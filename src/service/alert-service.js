@@ -4,42 +4,50 @@ const { ResponseError } = require("../error/response-error.js");
 const { updateAlertValidation } = require("../validation/alert-validation.js");
 
 const get = async (uid) => {
-  const farmerCount = await prismaClient.farmer.count({ where: uid });
+  const farmerCount = await prismaClient.farmer.count({ where: { uid: uid } });
 
   if (farmerCount === 0) {
     throw new ResponseError(404, "Farmer not found");
   }
-
-  return await prismaClient.historyAlert.findMany({
+  const result = await prismaClient.historyAlert.findMany({
     where: { farmerUid: uid },
-    select: { id: true, isRead: true },
     include: {
-      captureResult: {
-        select: {
-          mediaUrl: true,
-          createdAt: true,
-        },
-      },
+      captureResult: true,
     },
   });
+
+  return result;
 };
 
 const update = async (request) => {
   const updateRequest = validate(updateAlertValidation, request);
+
   const farmerCount = await prismaClient.farmer.count({
-    where: updateRequest.uid,
+    where: { uid: updateRequest.uid },
   });
+
   if (farmerCount === 0) {
     throw new ResponseError(404, "Farmer not found");
   }
 
-  return await prismaClient.historyAlert.update({
+  const alert = await prismaClient.historyAlert.findFirst({
+    where: { id: updateRequest.id },
+  });
+
+  if (!alert) {
+    throw new ResponseError(404, "Alert not found");
+  }
+
+  await prismaClient.historyAlert.update({
     where: { id: updateRequest.id },
     data: {
       isRead: updateRequest.isRead,
     },
-    select: { id: true, isRead: true },
-    include: { captureResult: { select: { mediaUrl: true, createdAt: true } } },
+  });
+
+  return await prismaClient.historyAlert.findFirst({
+    where: { id: updateRequest.id },
+    include: { captureResult: true },
   });
 };
 
