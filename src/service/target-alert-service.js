@@ -10,15 +10,17 @@ const { ResponseError } = require("../error/response-error.js");
 const get = async (request) => {
   const getRequest = validate(getTargetAlertValidation, request);
 
+  const farmerCount = await prismaClient.farmer.count({
+    where: { uid: getRequest.uid },
+  });
+
   if (farmerCount === 0) {
     throw new ResponseError(404, "Farmer not found");
   }
 
-  return await prismaClient.farmer.findFirst({
-    where: { uid: getRequest.uid },
-    include: {
-      targetAlert: { select: { email: true, phoneNumber: true } },
-    },
+  return await prismaClient.targetAlert.findFirst({
+    where: { farmerUid: getRequest.uid },
+    select: { email: true, phoneNumber: true },
   });
 };
 
@@ -32,7 +34,6 @@ const create = async (request) => {
   if (farmerCount === 0) {
     throw new ResponseError(404, "Farmer not found");
   }
-
   return await prismaClient.targetAlert.create({
     data: {
       email: createRequest.email,
