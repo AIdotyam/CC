@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE `farmers` (
-    `uid` INTEGER NOT NULL,
+    `uid` VARCHAR(256) NOT NULL,
     `email` VARCHAR(256) NOT NULL,
     `name` VARCHAR(256) NOT NULL,
 
@@ -14,7 +14,7 @@ CREATE TABLE `target_alerts` (
     `email` VARCHAR(256) NULL,
     `chat_id` VARCHAR(256) NULL,
     `phone_number` VARCHAR(20) NULL,
-    `farmer_uid` INTEGER NOT NULL,
+    `farmer_uid` VARCHAR(256) NOT NULL,
 
     UNIQUE INDEX `target_alerts_farmer_uid_key`(`farmer_uid`),
     PRIMARY KEY (`id`)
@@ -23,11 +23,11 @@ CREATE TABLE `target_alerts` (
 -- CreateTable
 CREATE TABLE `capture_results` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `dead_count` INTEGER NOT NULL,
+    `dead_chicken` BOOLEAN NOT NULL,
     `created_at` DATETIME(3) NOT NULL,
     `media_url` VARCHAR(256) NOT NULL,
     `is_alert` BOOLEAN NOT NULL,
-    `farmer_uid` INTEGER NOT NULL,
+    `farmer_uid` VARCHAR(256) NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -36,9 +36,10 @@ CREATE TABLE `capture_results` (
 CREATE TABLE `history_alerts` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `is_read` BOOLEAN NOT NULL,
-    `farmer_uid` INTEGER NOT NULL,
+    `farmer_uid` VARCHAR(256) NOT NULL,
     `capture_result_id` INTEGER NOT NULL,
 
+    UNIQUE INDEX `history_alerts_farmer_uid_key`(`farmer_uid`),
     UNIQUE INDEX `history_alerts_capture_result_id_key`(`capture_result_id`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

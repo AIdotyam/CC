@@ -41,7 +41,7 @@ model CaptureResult {
   createdAt    DateTime      @map("created_at")
   mediaUrl     String        @map("media_url") @db.VarChar(256)
   isAlert      Boolean       @map("is_alert")
-  farmerUid    String        @unique @map("farmer_uid") @db.VarChar(256)
+  farmerUid    String        @map("farmer_uid") @db.VarChar(256)
   farmer       Farmer        @relation(fields: [farmerUid], references: [uid])
   historyAlert HistoryAlert?
 
