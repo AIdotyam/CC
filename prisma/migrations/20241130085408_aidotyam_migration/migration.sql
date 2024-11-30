@@ -39,7 +39,6 @@ CREATE TABLE `history_alerts` (
     `farmer_uid` VARCHAR(256) NOT NULL,
     `capture_result_id` INTEGER NOT NULL,
 
-    UNIQUE INDEX `history_alerts_farmer_uid_key`(`farmer_uid`),
     UNIQUE INDEX `history_alerts_capture_result_id_key`(`capture_result_id`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

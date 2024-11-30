@@ -51,7 +51,7 @@ model CaptureResult {
 model HistoryAlert {
   id              Int           @id @default(autoincrement())
   isRead          Boolean       @map("is_read")
-  farmerUid       String        @unique @map("farmer_uid") @db.VarChar(256)
+  farmerUid       String        @map("farmer_uid") @db.VarChar(256)
   captureResultId Int           @unique @map("capture_result_id")
   farmer          Farmer        @relation(fields: [farmerUid], references: [uid])
   captureResult   CaptureResult @relation(fields: [captureResultId], references: [id])
