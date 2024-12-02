@@ -1,9 +1,9 @@
-const alertController = require("../service/alert-service.js");
+const alertService = require("../service/alert-service.js");
 
 const get = async (req, res, next) => {
   try {
     const uid = req.user.uid;
-    const result = await alertController.get(uid);
+    const result = await alertService.get(uid);
     const listAlerts = result.map((alert) => {
       return {
         id: alert.id,
@@ -25,7 +25,7 @@ const update = async (req, res, next) => {
     const id = req.params.id;
     const uid = req.user.uid;
     const isRead = req.body["is_read"];
-    const result = await alertController.update({ id, uid, isRead });
+    const result = await alertService.update({ id, uid, isRead });
 
     const alertResponse = {
       id: result.id,
