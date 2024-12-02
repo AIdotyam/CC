@@ -4,11 +4,20 @@
 
 Endpoint : POST /api/auth/googles
 
-Response Body Success :
+Request Body :
 
 ```json
 {
   "token": "generated-by-firebase"
+}
+```
+
+Response Body Success :
+
+```json
+{
+  "name": "Farmer's Name",
+  "email": "example@gmail.com"
 }
 ```
 
