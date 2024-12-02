@@ -1,9 +1,9 @@
 const express = require("express");
+const authController = require("../controller/auth-controller.js");
 
 const publicRouter = new express.Router();
 
-publicRouter.get("/", (req, res, next) => {
-  res.status(200).json({ test: "GET /" });
-});
+// Auth API
+protectedRouter.post("/api/auth/googles", authController.authGoogle);
 
 module.exports = { publicRouter };
