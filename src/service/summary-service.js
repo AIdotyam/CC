@@ -2,24 +2,20 @@ const { prismaClient } = require("../application/database.js");
 const { ResponseError } = require("../error/response-error.js");
 
 const get = async (uid) => {
-  const farmerCount = await prismaClient.farmer.count({ where: uid });
+  const farmerCount = await prismaClient.farmer.count({ where: { uid: uid } });
 
   if (farmerCount === 0) {
     throw new ResponseError(404, "Farmer not found");
   }
+  console.log(uid);
 
   const alerts = await prismaClient.historyAlert.findMany({
     where: { farmerUid: uid },
-    select: { id: true, isRead: true },
     include: {
-      captureResult: {
-        select: {
-          mediaUrl: true,
-          createdAt: true,
-        },
-      },
+      captureResult: true,
     },
   });
+
   const getMonthName = (monthIndex) => {
     const monthNames = [
       "january",
