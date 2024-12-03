@@ -9,7 +9,6 @@ const authMiddleware = async (req, res, next) => {
   try {
     const user = await admin.auth().verifyIdToken(idToken);
     req.user = user;
-
     next();
   } catch (e) {
     return res.status(403).json({ message: "Forbidden" });

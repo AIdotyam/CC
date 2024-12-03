@@ -18,12 +18,15 @@ const googleAuth = async (token) => {
 
     let responseStatus = 200;
 
-    const farmerCount = await prismaClient.farmer.count({ uid: farmer.uid });
+    let farmerCount = await prismaClient.farmer.count({
+      where: { uid: farmer.uid },
+    });
 
     if (farmerCount === 0) {
       await prismaClient.farmer.create({ data: farmer });
       responseStatus = 201;
     }
+
     farmer.status = responseStatus;
 
     return farmer;
