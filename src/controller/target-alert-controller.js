@@ -47,11 +47,11 @@ const update = async (req, res, next) => {
   try {
     const user = req.user;
     const dataRequest = {};
-    if (req.body.email) {
+    if (req.body.email || req.body.email === null) {
       dataRequest.email = req.body.email;
     }
-    if (req.body["phone_number"]) {
-      dataRequest.phoneNumber = req.body["phone_number"];
+    if (req.body.phone_number || req.body.phone_number === null) {
+      dataRequest.phoneNumber = req.body.phone_number;
     }
     const request = { uid: user.uid, ...dataRequest };
     const result = await targetAlertService.update(request);

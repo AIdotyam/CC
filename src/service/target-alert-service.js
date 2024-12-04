@@ -59,10 +59,10 @@ const update = async (request) => {
   }
 
   const updatedData = {};
-  if (updateRequest.email) {
+  if (updateRequest.email || updateRequest.email === null) {
     updatedData.email = updateRequest.email;
   }
-  if (updateRequest.phoneNumber) {
+  if (updateRequest.phoneNumber || updateRequest.phoneNumber === null) {
     updatedData.phoneNumber = updateRequest.phoneNumber;
   }
 

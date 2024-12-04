@@ -12,6 +12,8 @@ const get = async (req, res, next) => {
         is_read: alert.isRead,
       };
     });
+
+    listAlerts.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
     res.status(200).json({
       data: listAlerts,
     });
