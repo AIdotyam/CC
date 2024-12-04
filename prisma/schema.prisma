@@ -29,6 +29,7 @@ model TargetAlert {
   email       String? @db.VarChar(256)
   chatId      String? @map("chat_id") @db.VarChar(256)
   phoneNumber String? @map("phone_number") @db.VarChar(20)
+  fcm         String? @db.VarChar(512)
   farmerUid   String  @unique @map("farmer_uid") @db.VarChar(256)
   farmer      Farmer  @relation(fields: [farmerUid], references: [uid])
 
