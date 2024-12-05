@@ -4,7 +4,7 @@ const farmerController = require("../controller/farmer-controller.js");
 const targetAlertController = require("../controller/target-alert-controller.js");
 const processController = require("../controller/process.controller.js");
 const alertController = require("../controller/alert-controller.js");
-const summaryController = require("../controller/summary-controller.js");
+const captureResultController = require("../controller/capture-result-controller.js");
 const upload = require("../utils/multer-memory.js");
 
 const protectedRouter = new express.Router();
@@ -30,7 +30,7 @@ protectedRouter.post(
 protectedRouter.get("/api/alerts", alertController.get);
 protectedRouter.patch("/api/alerts/:id", alertController.update);
 
-// Summary API
-protectedRouter.get("/api/summaries", summaryController.get);
+// Capture Result API
+protectedRouter.get("/api/capture-results", captureResultController.get);
 
 module.exports = { protectedRouter };
