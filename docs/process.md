@@ -18,7 +18,7 @@ Response Body Success :
 ```json
 {
   "data": {
-    "media_url": "https://storage.googleapis.com/bucket-name/media-20241120143501",
+    "media_url": "https://storage.googleapis.com/aidotyam/media-20241120143501",
     "dead_chicken": true,
     "created_at": "2024-11-20T14:35:01Z",
     "is_alert": true
