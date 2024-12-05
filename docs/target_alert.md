@@ -14,7 +14,8 @@ Response Body Success :
 {
   "data": {
     "phone_number": "089999999999",
-    "email": "example@gmail.com"
+    "email": "example@gmail.com",
+    "fcm": "fcm-token"
   }
 }
 ```
@@ -40,7 +41,8 @@ Request Body :
 ```json
 {
   "phone_number": "089999999999",
-  "email": "example@gmail.com"
+  "email": "example@gmail.com",
+  "fcm": "fcm-token"
 }
 ```
 
@@ -76,7 +78,8 @@ Request Body :
 ```json
 {
   "phone_number": "089999999999", // optional
-  "email": "example@gmail.com" // optional
+  "email": "example@gmail.com", // optional
+  "fcm": "fcm-token" // optional
 }
 ```
 
@@ -86,7 +89,8 @@ Response Body Success :
 {
   "data": {
     "phone_number": "085555555555",
-    "email": "example123@gmail.com"
+    "email": "example123@gmail.com",
+    "fcm": "fcm-token"
   }
 }
 ```
