@@ -4,6 +4,9 @@ const path = require("path");
 const bucket = require("../utils/storage.js");
 const axios = require("axios");
 const FormData = require("form-data");
+const { sendPushNotification } = require("../alert/send-push-notification.js");
+const { sendWA } = require("../alert/wa.js");
+const { triggerAlarm } = require("../alert/iot.js");
 
 const create = async (uid, file) => {
   const farmerCount = await prismaClient.farmer.count({
@@ -13,7 +16,6 @@ const create = async (uid, file) => {
   if (farmerCount === 0) {
     throw new ResponseError(404, "Farmer not found");
   }
-
   const formData = new FormData();
   formData.append("file", file.buffer, file.originalname);
   try {
@@ -42,8 +44,25 @@ const create = async (uid, file) => {
     });
 
     let isAlert = false;
-    if (response.data["dead_chicken"]) {
+    if (response.data.dead_chicken) {
       isAlert = true;
+
+      const targetAlert = await prismaClient.targetAlert.findFirst({
+        where: { farmerUid: uid },
+        select: { fcm: true, phoneNumber: true, iot: true },
+      });
+
+      if (targetAlert.fcm !== null) {
+        sendPushNotification(targetAlert.fcm);
+      }
+
+      if (targetAlert.phoneNumber !== null) {
+        sendWA(targetAlert.phoneNumber);
+      }
+
+      if (targetAlert.iot !== null) {
+        triggerAlarm(targetAlert.iot);
+      }
     }
 
     const captureResult = await prismaClient.captureResult.create({

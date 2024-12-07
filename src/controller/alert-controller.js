@@ -4,18 +4,19 @@ const get = async (req, res, next) => {
   try {
     const uid = req.user.uid;
     const result = await alertService.get(uid);
-    const listAlerts = result.map((alert) => {
-      return {
-        id: alert.id,
-        media_url: alert.captureResult.mediaUrl,
-        created_at: alert.captureResult.createdAt,
-        is_read: alert.isRead,
-      };
-    });
+    const listAlertsResponse = result
+      .map((alert) => {
+        return {
+          id: alert.id,
+          media_url: alert.captureResult.mediaUrl,
+          created_at: alert.captureResult.createdAt,
+          is_read: alert.isRead,
+        };
+      })
+      .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
-    listAlerts.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
     res.status(200).json({
-      data: listAlerts,
+      data: listAlertsResponse,
     });
   } catch (e) {
     next(e);
