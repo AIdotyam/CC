@@ -44,6 +44,8 @@ const create = async (uid, file) => {
     });
 
     let isAlert = false;
+
+    // ALERTS
     if (response.data.dead_chicken) {
       isAlert = true;
 

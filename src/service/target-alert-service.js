@@ -20,7 +20,7 @@ const get = async (request) => {
 
   return await prismaClient.targetAlert.findFirst({
     where: { farmerUid: getRequest.uid },
-    select: { email: true, phoneNumber: true, fcm: true },
+    select: { phoneNumber: true, fcm: true },
   });
 };
 
@@ -36,13 +36,12 @@ const create = async (request) => {
   }
   return await prismaClient.targetAlert.create({
     data: {
-      email: createRequest.email,
+      fcm: createRequest.fcm,
       phoneNumber: createRequest.phoneNumber,
       farmerUid: createRequest.uid,
     },
     select: {
       phoneNumber: true,
-      email: true,
       fcm: true,
     },
   });
@@ -60,9 +59,7 @@ const update = async (request) => {
   }
 
   const updatedData = {};
-  if (updateRequest.email || updateRequest.email === null) {
-    updatedData.email = updateRequest.email;
-  }
+
   if (updateRequest.phoneNumber || updateRequest.phoneNumber === null) {
     updatedData.phoneNumber = updateRequest.phoneNumber;
   }
@@ -76,7 +73,6 @@ const update = async (request) => {
     data: updatedData,
     select: {
       phoneNumber: true,
-      email: true,
       fcm: true,
     },
   });
