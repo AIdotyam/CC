@@ -48,7 +48,7 @@ Before you begin, ensure you have met the following requirements:
    .env file
 
    ```bash
-   DATABASE_URL={your-database-url}
+   DATABASE_URL={your-database-prisma-url}
    PORT={your-port}
    BUCKET_NAME={your-bucket-name}
    MODEL_ENDPOINT={your-model-endpoint}
@@ -66,6 +66,12 @@ Before you begin, ensure you have met the following requirements:
    ```bash
    npm start
    ```
+
+- If you want to deploy to App Engine, make sure your terminal has gcloud installed and is connected to the correct Google Cloud Platform project. Then, run the following command:
+
+  ```bash
+  gcloud app deploy
+  ```
 
 ## 📜 License
 
