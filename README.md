@@ -6,7 +6,7 @@ This back-end provides endpoints for the AI.yam Android application. It sends al
 
 ## 🌟 Entity Relationship Diagram.
 
-![ERD](https://storage.googleapis.com/aidotyam/readme/erd.png)
+![ERD](assets/ERDforAI.yam.png)
 
 ## 📝 Prerequisites
 
